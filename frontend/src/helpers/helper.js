@@ -6,12 +6,12 @@ export const handleListItems = (array, setter, type) => {
 };
 
 export const handleDeleteListItem = (index, array, setter) => {
-  console.log("index", index);
   array.splice(index, 1);
   setter(array);
 };
 
 export const onChangeValue = (index, array, setter, value, key) => {
+  if (key === "amount") value = value ? value : 0;
   array[index][key] = value;
   setter(array);
 };

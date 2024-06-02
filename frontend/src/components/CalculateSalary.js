@@ -4,6 +4,8 @@ import {
   handleListItems,
   onChangeValue,
 } from "../helpers/helper";
+import { useDispatch } from "react-redux";
+import { clearReduxStore } from "../redux/salaryActions";
 
 const CalculateSalary = ({
   earnings,
@@ -14,14 +16,31 @@ const CalculateSalary = ({
   setIsDeductionBtnClicked,
   basicSalary,
   setBasicSalary,
+  setIsChangedanyValue,
 }) => {
+  const dispatch = useDispatch();
   return (
     <div>
       <div className="grid grid-cols-2">
         <h1 className="font-bold text-xl inter text-[#000000]">
           Calculate Your Salary
         </h1>
-        <div className="flex justify-end items-center gap-[2px] cursor-pointer">
+        <div
+          className="flex justify-end items-center gap-[2px] cursor-pointer"
+          onClick={async () => {
+            dispatch(clearReduxStore());
+            await Promise.allSettled([
+              localStorage.clear(),
+              setBasicSalary(0),
+              setEarnings([]),
+              setDeduction([]),
+            ]);
+            setTimeout(() => {
+              setIsAddAllowanceBtnClicked(true);
+              setIsDeductionBtnClicked(true);
+            }, 1000);
+          }}
+        >
           <div>
             <img src="https://i.ibb.co/Vtkr1LG/reset.png" alt="reset" />
           </div>
@@ -35,10 +54,14 @@ const CalculateSalary = ({
         <div className="">
           <input
             type="number"
+            value={basicSalary}
             id="amount1"
-            class="border rounded-[4px] bg-[#FFFFFF] text-[#000000] text-base font-normal inter block w-full md:w-[356px] py-[12px] px-[15px]"
+            className="border rounded-[4px] bg-[#FFFFFF] text-[#000000] text-base font-normal inter block w-full md:w-[356px] py-[12px] px-[15px]"
             required
-            onChange={(e) => setBasicSalary(parseFloat(e.target.value))}
+            onChange={(e) => {
+              setBasicSalary(parseFloat(e.target.value));
+              setIsChangedanyValue(true);
+            }}
           />
         </div>
       </div>
@@ -68,6 +91,7 @@ const CalculateSalary = ({
                   "title"
                 );
                 setIsAddAllowanceBtnClicked(true);
+                setIsChangedanyValue(true);
               }}
               value={{ ...value }.title}
             />
@@ -87,6 +111,7 @@ const CalculateSalary = ({
                   "amount"
                 );
                 setIsAddAllowanceBtnClicked(true);
+                setIsChangedanyValue(true);
               }}
               value={{ ...value }.amount}
             />
@@ -96,6 +121,7 @@ const CalculateSalary = ({
             onClick={() => {
               handleDeleteListItem(index, earnings, setEarnings);
               setIsAddAllowanceBtnClicked(true);
+              setIsChangedanyValue(true);
             }}
           >
             <img
@@ -104,12 +130,12 @@ const CalculateSalary = ({
             />
           </div>
           <div className="col-span-4 grid content-center">
-            <div class="flex items-center text-center">
+            <div className="flex items-center text-center">
               <input
                 id="checkbox-2"
                 type="checkbox"
-                class="w-4 h-4 bg-[#FFFFFF] b rounded-[4px]"
-                onClick={(e) => {
+                className="w-4 h-4 bg-[#FFFFFF] b rounded-[4px]"
+                onChange={(e) => {
                   onChangeValue(
                     index,
                     earnings,
@@ -118,12 +144,13 @@ const CalculateSalary = ({
                     "checked"
                   );
                   setIsAddAllowanceBtnClicked(true);
+                  setIsChangedanyValue(true);
                 }}
-                value={{ ...value }.checked}
+                checked={{ ...value }.checked}
               />
               <label
-                for="checkbox-2"
-                class="ms-2 text-base font-normal text-[#000000] inter mt-[6px]"
+                htmlFor="checkbox-2"
+                className="ms-2 text-base font-normal text-[#000000] inter mt-[6px]"
               >
                 EPF/ETF
               </label>
@@ -137,6 +164,7 @@ const CalculateSalary = ({
         onClick={() => {
           handleListItems(earnings, setEarnings, "earnings");
           setIsAddAllowanceBtnClicked(true);
+          setIsChangedanyValue(true);
         }}
       >
         <img src="https://i.ibb.co/hL5WnWc/plus.png" />
@@ -172,6 +200,7 @@ const CalculateSalary = ({
                   "title"
                 );
                 setIsDeductionBtnClicked(true);
+                setIsChangedanyValue(true);
               }}
               value={{ ...value }.title}
             />
@@ -191,6 +220,7 @@ const CalculateSalary = ({
                   "amount"
                 );
                 setIsDeductionBtnClicked(true);
+                setIsChangedanyValue(true);
               }}
               value={{ ...value }.amount}
             />
@@ -200,6 +230,7 @@ const CalculateSalary = ({
             onClick={() => {
               handleDeleteListItem(index, deduction, setDeduction);
               setIsDeductionBtnClicked(true);
+              setIsChangedanyValue(true);
             }}
           >
             <img
@@ -215,6 +246,7 @@ const CalculateSalary = ({
         onClick={() => {
           handleListItems(deduction, setDeduction, "deduction");
           setIsDeductionBtnClicked(true);
+          setIsChangedanyValue(true);
         }}
       >
         <img src="https://i.ibb.co/hL5WnWc/plus.png" />
