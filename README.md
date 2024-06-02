@@ -13,7 +13,6 @@ take-home pay in seconds.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Available Scripts](#available-scripts)
-- [License](#license)
 
 ## Installation
 
@@ -84,6 +83,3 @@ In the project directory, you can run:
 - **`npm run eject`**: Removes the single build dependency from your project (use with caution).
 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
