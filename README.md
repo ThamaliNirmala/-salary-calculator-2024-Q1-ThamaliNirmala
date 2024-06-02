@@ -12,9 +12,7 @@ take-home pay in seconds.
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
@@ -24,7 +22,7 @@ Follow these steps to get the project up and running on your local machine.
 1. **Clone the repository:**
 
    ```sh
-  https://github.com/ThamaliNirmala/salary-calculator-2024-Q1-ThamaliNirmala
+   git clone https://github.com/ThamaliNirmala/salary-calculator-2024-Q1-ThamaliNirmala
    ```
 
 2. **Navigate to the project directory:**
@@ -73,13 +71,8 @@ To run tests, use the following command:
 npm test
 ```
 
+This will run the test suite and show the results.
 
-- **public/**: Contains the static files such as `index.html` and `favicon.ico`.
-- **src/**: Contains the source code, including React components, pages, and styles.
-- **node_modules/**: Contains the project's dependencies.
-- **.gitignore**: Specifies which files should be ignored by Git.
-- **package.json**: Lists the project’s dependencies and scripts.
-- **README.md**: This file.
 
 ## Available Scripts
 
@@ -90,3 +83,7 @@ In the project directory, you can run:
 - **`npm test`**: Runs the test suite.
 - **`npm run eject`**: Removes the single build dependency from your project (use with caution).
 
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
